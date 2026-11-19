@@ -1,6 +1,8 @@
-
+from Helpers import Sesion as s
+from models import Usuario as u
+sesion = s.Sesion()
 def menu():
-
+   global sesion
    while True:
     print("Bienvenido a la busqueda del tesoro")
     print("1 - Iniciar sesion")
@@ -10,27 +12,27 @@ def menu():
 
     if opt == 1:
 
-       pass #cargar_usuario()
+        #cargar_usuario()
 
-       if usuario is not None:
-           #lo llevo al menu de juego como tal depende si es admin o no y log
-            pass
+       if sesion.usuarioLog is not None:
+           if sesion.usuarioLog is None:
+               pass
+
+
     elif opt == 2:
         pass
         #Lo registro y log
-
     elif opt == 3:
         print("----FIN DEL PROGRAMA----")
         #log
         break
-
-
     else:
         print("Opcion invalida")
         #log
 
 
 def menu_juego_usuario():
+    global sesion
     while True:
         print("1. Iniciar nueva partida")
         print("2. Cerrar sesion")
@@ -43,6 +45,7 @@ def menu_juego_usuario():
                 pass
 
             elif opt == "2":
+                sesion.usuarioLog = None
                 return
 
             elif opt == "3":
@@ -80,6 +83,7 @@ def menu_juego_admin():
             pass
 
         elif opt == "4":
+            sesion.usuarioLog = None
             return
 
         elif opt == "5":
