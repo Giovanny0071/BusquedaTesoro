@@ -30,6 +30,34 @@ def menu():
         #log
 
 
+def menu_juego_usuario():
+    while True:
+        print("1. Iniciar nueva partida")
+        print("2. Salir")
+
+        opt = int(input("Selecciona una opcion: "))
+
+        if opt == 1:
+            #nueva_partida()
+            pass
+
+        if opt == 2:
+            print("----FIN DEL PROGRAMA----")
+            break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
