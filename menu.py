@@ -1,4 +1,3 @@
-usuario = None
 
 def menu():
 
@@ -10,6 +9,7 @@ def menu():
     opt = int(input("Selecciona una opcion: "))
 
     if opt == 1:
+
        pass #cargar_usuario()
 
        if usuario is not None:
