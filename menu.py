@@ -1,5 +1,6 @@
 from Helpers import Sesion as s
 from models import Usuario as u
+from Logis import Logis as l
 sesion = s.Sesion()
 def menu():
    global sesion
@@ -15,9 +16,7 @@ def menu():
         #cargar_usuario()
 
        if sesion.usuarioLog is not None:
-           if sesion.usuarioLog is None:
-               pass
-
+           l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
 
     elif opt == 2:
         pass
@@ -42,13 +41,16 @@ def menu_juego_usuario():
 
             if opt == "1":
                 #nueva_partida()
+                l.registrarLogin("Partida Nueva", sesion.usuarioLog)
                 pass
 
             elif opt == "2":
+                l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
                 sesion.usuarioLog = None
                 return
 
             elif opt == "3":
+                l.registrarLogin("Fin del programa", sesion.usuarioLog)
                 print("----FIN DEL PROGRAMA----")
                 break
             else:
@@ -71,22 +73,27 @@ def menu_juego_admin():
         opt = input("Selecciona una opcion: ")
 
         if opt == "1":
+            l.registrarLogin("Partida Nueva", sesion.usuarioLog)
             #nueva_partida()
             pass
 
         elif opt == "2":
+            l.registrarLogin("Consultar estadisticas", sesion.usuarioLog)
             #estadisticas_sesion()
             pass
 
         elif opt == "3":
+            l.registrarLogin("Consultar historial", sesion.usuarioLog)
             #historial_partidas()
             pass
 
         elif opt == "4":
+            l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
             sesion.usuarioLog = None
             return
 
         elif opt == "5":
+            l.registrarLogin("Salir del programa", sesion.usuarioLog)
             print("----FIN DEL PROGRAMA----")
             break
 
