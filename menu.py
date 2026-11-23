@@ -7,8 +7,7 @@ def menu():
    while True:
     print("Bienvenido a la busqueda del tesoro")
     print("1 - Iniciar sesion")
-    print("2 - Registrarse")
-    print("3 - Salir")
+    print("2 - Salir")
     opt = int(input("Selecciona una opcion: "))
 
     if opt == 1:
@@ -19,9 +18,7 @@ def menu():
            l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
 
     elif opt == 2:
-        pass
-        #Lo registro y log
-    elif opt == 3:
+        l.registrarLogin("Cierre del programa")
         print("----FIN DEL PROGRAMA----")
         #log
         break
