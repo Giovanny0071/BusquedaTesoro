@@ -1,9 +1,10 @@
-from Helpers import Sesion as s
-from models import Usuario as u
+from helpers.sesion import Sesion
+from models import Usuario
 from Logis import Logis as l
-sesion = s.Sesion()
+sesion = Sesion()
+
 def menu():
-   global sesion
+
    while True:
     print("Bienvenido a la busqueda del tesoro")
     print("1 - Iniciar sesion")
@@ -12,10 +13,15 @@ def menu():
 
     if opt == 1:
 
-        #cargar_usuario()
+       #cargar_usuario()
 
        if sesion.usuarioLog is not None:
+
            l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
+           if sesion.usuarioLog.getRol() == "Usuario":
+               menu_juego_usuario()
+           else:
+               menu_juego_admin()
 
     elif opt == 2:
         l.registrarLogin("Cierre del programa")

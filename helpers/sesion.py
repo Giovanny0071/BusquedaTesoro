@@ -1,6 +1,8 @@
+
+from models import Usuario
 class Sesion:
-    def __init__(self,usuarioLog,partidas):
-        self.usuarioLog = None
+    def __init__(self):
+        self.usuarioLog = Usuario | None
         self.partidas = []
 
 
