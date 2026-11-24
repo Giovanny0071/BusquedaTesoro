@@ -1,6 +1,7 @@
 from helpers.sesion import Sesion
 from models import Usuario
 from Logis import Logis as l
+from usuario import Usuario as u
 sesion = Sesion()
 
 def menu():
@@ -13,10 +14,9 @@ def menu():
 
     if opt == 1:
 
-       #cargar_usuario()
+       sesion.usuarioLog = u.cargar_usuario()
 
        if sesion.usuarioLog is not None:
-
            l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
            if sesion.usuarioLog.getRol() == "Usuario":
                menu_juego_usuario()
@@ -26,11 +26,11 @@ def menu():
     elif opt == 2:
         l.registrarLogin("Cierre del programa")
         print("----FIN DEL PROGRAMA----")
-        #log
+
         break
     else:
         print("Opcion invalida")
-        #log
+
 
 
 def menu_juego_usuario():
