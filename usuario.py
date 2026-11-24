@@ -1,7 +1,7 @@
 from models import Usuario
 from logis import Logis as l
 
-def cargarUsuario():
+def cargar_usuario():
     while True:
         nom = input("Ingrese su nombre: ")
         cont = input("Ingrese su contraseña: ")
