@@ -31,11 +31,11 @@ def cargarUsuario():
 
         except FileNotFoundError:
             print("Credenciales incorrectas")
-            l.registrarLogin("Intento de inicio de sesion fallido")
+            l.registrarLogin("Intento de inicio de sesion fallido","ANONIMO")
             return None
 
         except PermissionError as e:
-            l.registrarLogin("Intento de inicio de sesion fallido")
+            l.registrarLogin("Intento de inicio de sesion fallido","ANONIMO")
             print("No tienes permiso para abrir el fichero")
             print(e)
             return None
@@ -43,5 +43,5 @@ def cargarUsuario():
         except FileExistsError as e:
             print("El fichero no existe")
             print(e)
-            l.registrarLogin("Intento de inicio de sesion fallido")
+            l.registrarLogin("Intento de inicio de sesion fallido","ANONIMO")
             return None
