@@ -2,11 +2,11 @@ class Usuario:
 
 
 
-    def __init__(self, nombre, contrasena, rol,partidas):
+    def __init__(self, nombre, contrasena, rol):
         self.nombre = nombre
         self.contrasena = contrasena
         self.rol = rol
-        self.partidas = partidas
+        self.partidas = []
 
 
 
