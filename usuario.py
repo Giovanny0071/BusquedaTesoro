@@ -1,5 +1,5 @@
 from models import Usuario
-from Logis import Logis as l
+from logis import Logis as l
 
 def cargarUsuario():
     while True:
