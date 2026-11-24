@@ -1,7 +1,8 @@
+from helpers import sesion
 from helpers.sesion import Sesion
 from models import Partida, Usuario
 import random
-
+from logis import Logis as l
 def nueva_partida(sesion:Sesion):
 
 
@@ -50,6 +51,8 @@ def nueva_partida(sesion:Sesion):
         else:
             print("Dificultad invalida")
 
+   l.registrarlog(f"Partida iniciada | dificultad={dificultad}",sesion.usuarioLog.getNombre())
+
    partida = Partida(sesion.usuarioLog.getNombre(),dificultad,tablero,intentosMax)
    jugar_partida(sesion,partida)
 
@@ -69,46 +72,50 @@ def jugar_partida(sesion:Sesion,partida:Partida):
         try:
             fila = int(input("Dime que fila quieres mirar"))
             columna = int(input("Dime que columna quieres mirar"))
-            if (pistas):
-              quierePista = input("Quieres una pista? (s/n)")
-              if(quierePista == "s"):
-                  print(cargar_pista(fila,columna,posicion_tesoro))
-                  pass
-              elif(quierePista == "n"):
-                  print("Has decidido que no quieres pista")
 
-              else:
-                  raise ValueError
-
-            if(partida.tablero[fila,columna] != "💎" or partida.tablero[fila,columna] != "0" ):
-                intentos += 1
-                tableroRevelo[fila,columna] = "0"
+            if (partida.tablero[fila, columna] == "0"):
+                print("No puedes mirar de nuevo la misma casilla")
             else:
-                ganada = True
-                break
+                l.registrarlog(f"Coordenadas seleccionadas | fila={fila} | columna={columna}",sesion.usuarioLog.getNombre())
+                if (pistas):
+                  quierePista = input("Quieres una pista? (s/n)")
+                  if(quierePista == "s"):
+                      l.registrarlog(f"Pista solicitada | fila={fila} | columna={columna}", sesion.usuarioLog.getNombre())
+                      print(cargar_pista(fila,columna,posicion_tesoro))
+                  elif(quierePista == "n"):
+                      print("Has decidido que no quieres pista")
+                  else:
+                      raise ValueError
+                if(partida.tablero[fila,columna] != "💎"):
+                        intentos += 1
+                        tableroRevelo[fila, columna] = "0"
+                else:
+                    ganada = True
+                    break
         except ValueError:
             print("Respuesta no valida")
         except Exception:
             print("Te has ido del tablero")
 
-    partida.finalizada = True
-    if(ganada):
-        partida.intentos = intentos
-        partida.estado = "Ganada"
-        print("Felicidades has ganado")
-    else:
-        partida.intentos = partida.intentosMax
-        partida.estado = "Perdida"
-        print("Felicidades has ganado")
+        partida.finalizada = True
+        if(ganada):
+            partida.intentos = intentos
+            partida.estado = "Ganada"
+            print("Felicidades has ganado")
+        else:
+            partida.intentos = partida.intentosMax
+            partida.estado = "Perdida"
+            print("Has perdido")
 
-    sesion.partidas.append(partida)
-
-
-
+        l.registrarlog(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
+        sesion.partidas.append(partida)
 
 
 
-def mostrar_tablero(tablero):
+
+
+
+def mostrar_tablero(tablero,sesion:Sesion):
     for i in tablero:
         print()
         for j in i:
@@ -116,7 +123,6 @@ def mostrar_tablero(tablero):
 
 
 def cargar_pista(fila, columna, posicion_tesoro):
-
     fila_tesoro = posicion_tesoro[0]
     columna_tesoro = posicion_tesoro[1]
 
@@ -124,6 +130,11 @@ def cargar_pista(fila, columna, posicion_tesoro):
     diferencia_columna = abs(columna - columna_tesoro)
 
     if max(diferencia_fila, diferencia_columna) == 1:
-        return "Estás cerca del tesoro"
+        resultado =  "Estás cerca del tesoro"
 
-    return "Estás lejos del tesoro"
+
+    else:
+     resultado = "Estás lejos del tesoro"
+
+    l.registrarlog(f"Resultado de la pista | {resultado}", sesion.usuarioLog.getNombre())
+    return resultado
