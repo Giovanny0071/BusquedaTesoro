@@ -8,10 +8,6 @@ def nueva_partida(sesion:Sesion):
 
    while(True):
         dificultad = input("Que dificultad quieres?   (1) Facil | (2) Normal | (3) Dificil ")
-        try:
-             intentosMax = int(input("Cuantos intentos maximos quieres?"))
-        except ValueError:
-            print("No has puesto unos intentos maximos validos")
 
         if dificultad == "1":
             tablero  = [
@@ -47,9 +43,16 @@ def nueva_partida(sesion:Sesion):
                 ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
                 ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ]
-            break
         else:
             print("Dificultad invalida")
+
+        try:
+             intentosMax = int(input("Cuantos intentos maximos quieres?"))
+             break
+        except ValueError:
+            print("No has puesto unos intentos maximos validos")
+           continue
+
 
    l.registrarlog(f"Partida iniciada | dificultad={dificultad}",sesion.usuarioLog.getNombre())
 
@@ -67,11 +70,14 @@ def jugar_partida(sesion:Sesion,partida:Partida):
     pistas = False
     while(partida.intentosMax != intentos):
         mostrar_tablero(tableroRevelo)
-        if(intentos >= 3):
+        if(intentos > 3):
             pistas = True
         try:
             fila = int(input("Dime que fila quieres mirar"))
             columna = int(input("Dime que columna quieres mirar"))
+            abandonar = input("Quieres abandonar la partida? (pon 's' para abandonar)")
+            if(abandonar.lower() == "s"):
+                break
 
             if (partida.tablero[fila, columna] == "0"):
                 print("No puedes mirar de nuevo la misma casilla")
@@ -81,7 +87,7 @@ def jugar_partida(sesion:Sesion,partida:Partida):
                   quierePista = input("Quieres una pista? (s/n)")
                   if(quierePista == "s"):
                       l.registrarlog(f"Pista solicitada | fila={fila} | columna={columna}", sesion.usuarioLog.getNombre())
-                      print(cargar_pista(fila,columna,posicion_tesoro))
+                      print(cargar_pista(fila,columna,posicion_tesoro,sesion))
                   elif(quierePista == "n"):
                       print("Has decidido que no quieres pista")
                   else:
@@ -94,35 +100,41 @@ def jugar_partida(sesion:Sesion,partida:Partida):
                     break
         except ValueError:
             print("Respuesta no valida")
+            continue
         except Exception:
             print("Te has ido del tablero")
+            continue
 
-        partida.finalizada = True
-        if(ganada):
-            partida.intentos = intentos
-            partida.estado = "Ganada"
-            print("Felicidades has ganado")
-        else:
-            partida.intentos = partida.intentosMax
-            partida.estado = "Perdida"
-            print("Has perdido")
+    partida.finalizada = True
+    if(ganada):
+        partida.intentos = intentos
+        partida.estado = "Ganada"
+        print("Felicidades has ganado")
+    elif(abandonar):
+        partida.intentos = partida.intentos
+        partida.estado = "Abandonada"
+        print("Has Abandonado")
+    else:
+        partida.intentos = intentos
+        partida.estado = "Perdida"
+        print("Has Perdido")
 
-        l.registrarlog(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
-        sesion.partidas.append(partida)
+    l.registrarlog(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
+    sesion.partidas.append(partida)
 
 
 
 
 
 
-def mostrar_tablero(tablero,sesion:Sesion):
+def mostrar_tablero(tablero):
     for i in tablero:
         print()
         for j in i:
             print(j, end=" ")
 
 
-def cargar_pista(fila, columna, posicion_tesoro):
+def cargar_pista(fila, columna, posicion_tesoro,sesion:Sesion):
     fila_tesoro = posicion_tesoro[0]
     columna_tesoro = posicion_tesoro[1]
 
