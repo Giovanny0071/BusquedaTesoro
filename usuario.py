@@ -8,8 +8,8 @@ def cargarUsuario():
         usuario = None
 
         try:
-            with open("usuarios.txt", "r") as f:
-
+            with open("usuarios.txt", "a+") as f:
+                f.seek(0) 
                 linea = f.readline()
 
                 while linea:
