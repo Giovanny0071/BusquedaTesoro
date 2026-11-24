@@ -17,7 +17,7 @@ def cargar_usuario():
                     datos = linea.strip().split(";")
                     if len(datos) == 3:
                         if datos[0] == nom and datos[1] == cont:
-                            usuario = Usuario(datos[0], datos[1],datos[2],datos[3])
+                            usuario = Usuario(datos[0], datos[1],datos[2])
 
                     linea = f.readline()
 

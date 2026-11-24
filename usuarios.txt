@@ -1,5 +1,5 @@
-ana;AnaPrueba23;usuario
-marcos;MarcosPrueba47;usuario
-lucia;LuciaPrueba81;usuario
-pablo;PabloPrueba36;usuario
-admin;AdminPrueba59;admin
+ana;AnaPrueba23;Usuario
+marcos;MarcosPrueba47;Usuario
+lucia;LuciaPrueba81;Usuario
+pablo;PabloPrueba36;Usuario
+admin;AdminPrueba59;Admin

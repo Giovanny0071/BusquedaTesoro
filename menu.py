@@ -1,7 +1,7 @@
 from helpers.sesion import Sesion
 from models import Usuario
 from logis import Logis as l
-from usuario import Usuario as u
+from usuario import cargar_usuario
 sesion = Sesion()
 
 def menu():
@@ -14,7 +14,7 @@ def menu():
 
     if opt == 1:
 
-       sesion.usuarioLog = u.cargar_usuario()
+       sesion.usuarioLog = cargar_usuario()
 
        if sesion.usuarioLog is not None:
            l.registrarLogin("Inicio de sesion",sesion.usuarioLog.getNombre())
