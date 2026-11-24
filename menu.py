@@ -1,6 +1,6 @@
 from helpers.sesion import Sesion
 from models import Usuario
-from Logis import Logis as l
+from logis import Logis as l
 from usuario import Usuario as u
 sesion = Sesion()
 
