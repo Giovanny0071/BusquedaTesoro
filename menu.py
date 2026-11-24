@@ -17,14 +17,14 @@ def menu():
        sesion.usuarioLog = u.cargar_usuario()
 
        if sesion.usuarioLog is not None:
-           l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
+           l.registrarLogin("Inicio de sesion",sesion.usuarioLog.getNombre())
            if sesion.usuarioLog.getRol() == "Usuario":
                menu_juego_usuario()
            else:
                menu_juego_admin()
 
     elif opt == 2:
-        l.registrarLogin("Cierre del programa")
+        l.registrarLogin("Cierre del programa","ANONIMO")
         print("----FIN DEL PROGRAMA----")
 
         break
@@ -44,16 +44,16 @@ def menu_juego_usuario():
 
             if opt == "1":
                 #nueva_partida()
-                l.registrarLogin("Partida Nueva", sesion.usuarioLog)
+                l.registrarLogin(sesion.usuarioLog,"Partida Nueva",sesion.usuarioLog.getNombre() )
                 pass
 
             elif opt == "2":
-                l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
+                l.registrarLogin(sesion.usuarioLog,"Cerrar sesion",sesion.usuarioLog.getNombre())
                 sesion.usuarioLog = None
                 return
 
             elif opt == "3":
-                l.registrarLogin("Fin del programa", sesion.usuarioLog)
+                l.registrarLogin(sesion.usuarioLog,"Fin del programa",sesion.usuarioLog.getNombre())
                 print("----FIN DEL PROGRAMA----")
                 break
             else:
@@ -76,27 +76,27 @@ def menu_juego_admin():
         opt = input("Selecciona una opcion: ")
 
         if opt == "1":
-            l.registrarLogin("Partida Nueva", sesion.usuarioLog)
+            l.registrarLogin("Partida Nueva", sesion.usuarioLog.getNombre())
             #nueva_partida()
             pass
 
         elif opt == "2":
-            l.registrarLogin("Consultar estadisticas", sesion.usuarioLog)
+            l.registrarLogin("Consultar estadisticas", sesion.usuarioLog.getNombre())
             #estadisticas_sesion()
             pass
 
         elif opt == "3":
-            l.registrarLogin("Consultar historial", sesion.usuarioLog)
+            l.registrarLogin("Consultar historial", sesion.usuarioLog.getNombre())
             #historial_partidas()
             pass
 
         elif opt == "4":
-            l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
+            l.registrarLogin("Cerrar sesion", sesion.usuarioLog.getNombre())
             sesion.usuarioLog = None
             return
 
         elif opt == "5":
-            l.registrarLogin("Salir del programa", sesion.usuarioLog)
+            l.registrarLogin("Salir del programa", sesion.usuarioLog.getNombre())
             print("----FIN DEL PROGRAMA----")
             break
 
