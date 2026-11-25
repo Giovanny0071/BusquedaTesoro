@@ -134,6 +134,8 @@ def jugar_partida(sesion:Sesion,partida:Partida):
 
     l.registrarlog(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
     sesion.partidas.append(partida)
+    sesion.usuarioLog.partidas.append(partida)
+
 
 
 

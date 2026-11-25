@@ -1,6 +1,7 @@
 from helpers.sesion import Sesion
 from models import Usuario
 from logis import Logis as l
+from partida import nueva_partida
 from usuario import cargar_usuario
 sesion = Sesion()
 
@@ -43,7 +44,7 @@ def menu_juego_usuario():
             opt = input("Selecciona una opcion: ")
 
             if opt == "1":
-                #nueva_partida()
+                nueva_partida(sesion)
                 l.registrarLogin(sesion.usuarioLog,"Partida Nueva",sesion.usuarioLog.getNombre() )
                 pass
 
@@ -77,7 +78,7 @@ def menu_juego_admin():
 
         if opt == "1":
             l.registrarLogin("Partida Nueva", sesion.usuarioLog.getNombre())
-            #nueva_partida()
+            nueva_partida(sesion)
             pass
 
         elif opt == "2":

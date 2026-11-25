@@ -22,9 +22,12 @@ class Usuario:
     def getPartidas(self):
         return self.partidas
 
+    def setPartida(self,partida):
+        self.partidas = self.partidas.append(self,partida)
+
 
 class Partida:
-    def __init__(self, nombre,dificultad,tablero,intentosMax,finalizada):
+    def __init__(self, nombre,dificultad,tablero,intentosMax):
         self.nombre = nombre
         self.estado = "Abandonada"
         self.finalizada = False
@@ -51,6 +54,9 @@ class Partida:
 
     def getTablero(self):
         return self.tablero
+
+    def getfinalizada(self):
+        return self.finalizada
 
 
     def setEstado(self, estado):

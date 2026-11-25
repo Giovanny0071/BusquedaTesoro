@@ -1,3 +1,4 @@
+from helpers.sesion import Sesion
 from models import Usuario
 from logis import Logis as l
 
@@ -45,3 +46,4 @@ def cargar_usuario():
             print(e)
             l.registrarLogin("Intento de inicio de sesion fallido","ANONIMO")
             return None
+
