@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from helpers import sesion
 from helpers.sesion import Sesion
 from models import Partida, Usuario
@@ -17,7 +19,6 @@ def nueva_partida(sesion:Sesion):
                 ["*", "*", "*", "*", "*"],
                 ["*", "*", "*", "*", "*"],
             ]
-            break
         elif dificultad == "2":
             tablero = [
                 ["*", "*", "*", "*", "*", "*", "*", "*"],
@@ -29,7 +30,6 @@ def nueva_partida(sesion:Sesion):
                 ["*", "*", "*", "*", "*", "*", "*", "*"],
                 ["*", "*", "*", "*", "*", "*", "*", "*"],
             ]
-            break
         elif dificultad == "3":
             tablero = [
                 ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
@@ -45,12 +45,18 @@ def nueva_partida(sesion:Sesion):
             ]
         else:
             print("Dificultad invalida")
-
+            continue
         try:
              intentosMax = int(input("Cuantos intentos maximos quieres?"))
+
+             if(intentosMax <= 0):
+                 raise ValueError
+
+
+
              break
         except ValueError:
-            print("No has puesto unos intentos maximos validos")
+           print("No has puesto unos intentos maximos validos")
            continue
 
 
@@ -60,13 +66,13 @@ def nueva_partida(sesion:Sesion):
    jugar_partida(sesion,partida)
 
 def jugar_partida(sesion:Sesion,partida:Partida):
-    numPosTesA = random.randint(0,len(partida.tablero))
-    numPosTesB = random.randint(0,len(partida.tablero))
+    numPosTesA = random.randrange(len(partida.tablero))
+    numPosTesB = random.randrange(len(partida.tablero[0]))
     intentos = 0
     ganada = False
-    posicion_tesoro = [numPosTesA,numPosTesB]
-    tableroRevelo = partida.tablero
-    partida.tablero[posicion_tesoro[0],posicion_tesoro[1]] = "💎"
+    posicion_tesoro = [numPosTesA, numPosTesB]
+    tableroRevelo = deepcopy(partida.tablero)
+    partida.tablero[posicion_tesoro[0]][posicion_tesoro[1]] = "💎"
     pistas = False
     while(partida.intentosMax != intentos):
         mostrar_tablero(tableroRevelo)
@@ -75,11 +81,16 @@ def jugar_partida(sesion:Sesion,partida:Partida):
         try:
             fila = int(input("Dime que fila quieres mirar"))
             columna = int(input("Dime que columna quieres mirar"))
+
+            if(fila < 0 or columna < 0):
+                raise ValueError
+
+
             abandonar = input("Quieres abandonar la partida? (pon 's' para abandonar)")
             if(abandonar.lower() == "s"):
                 break
 
-            if (partida.tablero[fila, columna] == "0"):
+            if (partida.tablero[fila][columna] == "0"):
                 print("No puedes mirar de nuevo la misma casilla")
             else:
                 l.registrarlog(f"Coordenadas seleccionadas | fila={fila} | columna={columna}",sesion.usuarioLog.getNombre())
@@ -92,9 +103,11 @@ def jugar_partida(sesion:Sesion,partida:Partida):
                       print("Has decidido que no quieres pista")
                   else:
                       raise ValueError
-                if(partida.tablero[fila,columna] != "💎"):
-                        intentos += 1
-                        tableroRevelo[fila, columna] = "0"
+                intentos += 1
+                if(partida.tablero[fila][columna] != "💎"):
+
+                        tableroRevelo[fila][columna] = "0"
+                        partida.tablero[fila][columna] = "0"
                 else:
                     ganada = True
                     break
@@ -102,7 +115,7 @@ def jugar_partida(sesion:Sesion,partida:Partida):
             print("Respuesta no valida")
             continue
         except Exception:
-            print("Te has ido del tablero")
+            print("Posicion no valida")
             continue
 
     partida.finalizada = True
@@ -110,8 +123,8 @@ def jugar_partida(sesion:Sesion,partida:Partida):
         partida.intentos = intentos
         partida.estado = "Ganada"
         print("Felicidades has ganado")
-    elif(abandonar):
-        partida.intentos = partida.intentos
+    elif(abandonar.lower() == "s"):
+        partida.intentos = intentos
         partida.estado = "Abandonada"
         print("Has Abandonado")
     else:
