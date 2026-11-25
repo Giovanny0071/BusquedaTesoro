@@ -24,13 +24,14 @@ class Usuario:
 
 
 class Partida:
-    def __init__(self, nombre, estado,dificultad,tamano,intentos,tablero):
+    def __init__(self, nombre,dificultad,tablero,intentosMax,finalizada):
         self.nombre = nombre
-        self.estado = estado
+        self.estado = "Abandonada"
+        self.finalizada = False
         self.dificultad = dificultad
-        self.tamano = tamano
-        self.intentos = intentos
+        self.intentos = 0
         self.tablero = tablero
+        self.intentosMax = intentosMax
 
 
     def getNombre(self):
@@ -50,4 +51,11 @@ class Partida:
 
     def getTablero(self):
         return self.tablero
+
+
+    def setEstado(self, estado):
+        self.estado = estado
+
+    def setIntentos(self, intentos):
+        self.intentos = intentos
 

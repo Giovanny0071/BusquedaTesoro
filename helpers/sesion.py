@@ -10,6 +10,8 @@ class Sesion:
         return self.usuarioLog
 
 
+
+
     def setUsuarioLog(self,usuarioLog):
         self.usuarioLog = usuarioLog
 
@@ -18,8 +20,8 @@ class Sesion:
         return self.partidas
 
 
-    def setPartidas(self,partidas):
-        self.partidas = partidas
+    def setPartida(self,partida):
+        self.partidas = self.partidas.append(self,partida)
 
 
     def getPartidasFinalizadas(self):
