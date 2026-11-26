@@ -90,7 +90,7 @@ def menu_juego_admin():
 
         elif opt == "3":
             l.registrarLogin("Consultar historial", sesion.usuarioLog.getNombre())
-            historial_partidas()
+            historial_partidas(sesion)
 
         elif opt == "4":
             l.registrarLogin("Cerrar sesion", sesion.usuarioLog.getNombre())
