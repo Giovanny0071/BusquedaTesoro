@@ -8,7 +8,7 @@ def estadisticas_sesion(sesion):
     print(sesion.getPartidasIniciadas())
 
     print("---Total partidas finalizadas---")
-    print(sesion.getTotalPartidasFinalizadas())
+    print(sesion.getPartidasFinalizadas())
 
     print("---Total de partidas ganadas--")
     print(sesion.getPartidasGanadas())
@@ -20,7 +20,7 @@ def estadisticas_sesion(sesion):
     print(sesion.getPorcentajeGanadasFInalizadas())
 
     print("---Numero total de intentos realizados---")
-    print(sesion.get)
+    print(sesion.getTodosIntentos())
 
     print("---Media de intentos necesarios para encontrar el tesoro en partidias ganadas---")
     print(sesion.getMediaIntentos())
@@ -33,17 +33,17 @@ def estadisticas_sesion(sesion):
 
 
     print("---Partidas por usuario---")
-    recuento = sesion.partidas_por_usuario(sesion)
+    recuento = sesion.partidas_por_usuario()
 
     for nombre, cantidad in recuento.items():
         print(f"{nombre}: {cantidad} partidas")
 
 
     print("---Grafico de ganadas y perdidas---")
-    sesion.graficoGanadas(sesion)
+    sesion.grafico_ganadas_perdidas()
 
     print("---Grafico por dificultad---")
-    sesion.graficoDificultad(sesion)
+    sesion.grafico_dificultad()
 
 
 
