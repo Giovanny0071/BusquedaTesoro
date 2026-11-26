@@ -40,10 +40,10 @@ def estadisticas_sesion(sesion):
 
 
     print("---Grafico de ganadas y perdidas---")
-    sesion.graficoGanadas()
+    sesion.grafico_ganadas_perdidas()
 
     print("---Grafico por dificultad---")
-    sesion.graficoDificultad()
+    sesion.grafico_dificultad()
 
 
 

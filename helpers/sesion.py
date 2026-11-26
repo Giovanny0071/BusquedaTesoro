@@ -119,7 +119,7 @@ class Sesion:
         recuento = {}
 
         for partida in self.partidas:
-            nombre = partida.usuario  # Atributo donde guardas el nombre del jugador
+            nombre = partida.getNombre()  # Atributo donde guardas el nombre del jugador
 
             if nombre in recuento:
                 recuento[nombre] += 1
