@@ -79,14 +79,14 @@ def jugar_partida(sesion:Sesion,partida:Partida):
         if(intentos > 3):
             pistas = True
         try:
-            fila = int(input("Dime que fila quieres mirar"))
-            columna = int(input("Dime que columna quieres mirar"))
+            fila = int(input("Dime que fila quieres mirar: "))
+            columna = int(input("Dime que columna quieres mirar: "))
 
             if(fila < 0 or columna < 0):
                 raise ValueError
 
 
-            abandonar = input("Quieres abandonar la partida? (pon 's' para abandonar)")
+            abandonar = input("Quieres abandonar la partida? (pon 's' para abandonar): ")
             if(abandonar.lower() == "s"):
                 break
 
@@ -95,7 +95,7 @@ def jugar_partida(sesion:Sesion,partida:Partida):
             else:
                 l.registrarLogin(f"Coordenadas seleccionadas | fila={fila} | columna={columna}",sesion.usuarioLog.getNombre())
                 if (pistas):
-                  quierePista = input("Quieres una pista? (s/n)")
+                  quierePista = input("Quieres una pista? (s/n): ")
                   if(quierePista == "s"):
                       l.registrarLogin(f"Pista solicitada | fila={fila} | columna={columna}", sesion.usuarioLog.getNombre())
                       print(cargar_pista(fila,columna,posicion_tesoro,sesion))

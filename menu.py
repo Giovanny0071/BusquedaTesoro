@@ -2,6 +2,7 @@ import sys
 
 from estadisticas import estadisticas_sesion
 from helpers.sesion import Sesion
+from historial import historial_partidas
 from models import Usuario
 from logis import Logis as l
 from partida import nueva_partida
@@ -89,8 +90,7 @@ def menu_juego_admin():
 
         elif opt == "3":
             l.registrarLogin("Consultar historial", sesion.usuarioLog.getNombre())
-            #historial_partidas()
-            pass
+            historial_partidas(sesion)
 
         elif opt == "4":
             l.registrarLogin("Cerrar sesion", sesion.usuarioLog.getNombre())
