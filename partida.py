@@ -1,10 +1,10 @@
 from copy import deepcopy
 
-from helpers import sesion
+
 from helpers.sesion import Sesion
-from models import Partida, Usuario
+from models import Partida
 import random
-from logis import Logis as l
+from logis import registro as l
 def nueva_partida(sesion:Sesion):
 
 
