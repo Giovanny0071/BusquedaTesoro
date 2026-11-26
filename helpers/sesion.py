@@ -115,10 +115,10 @@ class Sesion:
         return intentos
 
 
-    def partidas_por_usuario(sesion):
+    def partidas_por_usuario(self):
         recuento = {}
 
-        for partida in sesion.partidas:
+        for partida in self.partidas:
             nombre = partida.usuario  # Atributo donde guardas el nombre del jugador
 
             if nombre in recuento:
@@ -142,9 +142,9 @@ class Sesion:
         return totales
 
 
-    def grafico_ganadas_perdidas(sesion):
-        ganadas = sesion.getPartidasGanadas()
-        perdidas = sesion.getPerdidas()
+    def grafico_ganadas_perdidas(self):
+        ganadas = self.getPartidasGanadas()
+        perdidas = self.getPerdidas()
 
         plt.figure()
         plt.bar(["Ganadas", "Perdidas"], [ganadas, perdidas])
@@ -152,8 +152,8 @@ class Sesion:
         plt.ylabel("Número de partidas")
         plt.show()
 
-    def grafico_dificultad(sesion):
-        partidas_difi = sesion.getPartidasPorDificultad()
+    def grafico_dificultad(self):
+        partidas_difi = self.getPartidasPorDificultad()
 
         plt.figure()
         plt.bar(["Fácil", "Normal", "Difícil"], partidas_difi)

@@ -8,7 +8,7 @@ def estadisticas_sesion(sesion):
     print(sesion.getPartidasIniciadas())
 
     print("---Total partidas finalizadas---")
-    print(sesion.getTotalPartidasFinalizadas())
+    print(sesion.getPartidasFinalizadas())
 
     print("---Total de partidas ganadas--")
     print(sesion.getPartidasGanadas())
@@ -33,17 +33,17 @@ def estadisticas_sesion(sesion):
 
 
     print("---Partidas por usuario---")
-    recuento = sesion.partidas_por_usuario(sesion)
+    recuento = sesion.partidas_por_usuario()
 
     for nombre, cantidad in recuento.items():
         print(f"{nombre}: {cantidad} partidas")
 
 
     print("---Grafico de ganadas y perdidas---")
-    sesion.graficoGanadas(sesion)
+    sesion.graficoGanadas()
 
     print("---Grafico por dificultad---")
-    sesion.graficoDificultad(sesion)
+    sesion.graficoDificultad()
 
 
 
