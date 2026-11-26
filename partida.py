@@ -60,7 +60,7 @@ def nueva_partida(sesion:Sesion):
            continue
 
 
-   l.registrarlog(f"Partida iniciada | dificultad={dificultad}",sesion.usuarioLog.getNombre())
+   l.registrarLogin(f"Partida iniciada | dificultad={dificultad}",sesion.usuarioLog.getNombre())
 
    partida = Partida(sesion.usuarioLog.getNombre(),dificultad,tablero,intentosMax)
    jugar_partida(sesion,partida)
@@ -93,11 +93,11 @@ def jugar_partida(sesion:Sesion,partida:Partida):
             if (partida.tablero[fila][columna] == "0"):
                 print("No puedes mirar de nuevo la misma casilla")
             else:
-                l.registrarlog(f"Coordenadas seleccionadas | fila={fila} | columna={columna}",sesion.usuarioLog.getNombre())
+                l.registrarLogin(f"Coordenadas seleccionadas | fila={fila} | columna={columna}",sesion.usuarioLog.getNombre())
                 if (pistas):
                   quierePista = input("Quieres una pista? (s/n)")
                   if(quierePista == "s"):
-                      l.registrarlog(f"Pista solicitada | fila={fila} | columna={columna}", sesion.usuarioLog.getNombre())
+                      l.registrarLogin(f"Pista solicitada | fila={fila} | columna={columna}", sesion.usuarioLog.getNombre())
                       print(cargar_pista(fila,columna,posicion_tesoro,sesion))
                   elif(quierePista == "n"):
                       print("Has decidido que no quieres pista")
@@ -132,7 +132,7 @@ def jugar_partida(sesion:Sesion,partida:Partida):
         partida.estado = "Perdida"
         print("Has Perdido")
 
-    l.registrarlog(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
+    l.registrarLogin(f"Partida finalizada | resultado={partida.estado} | intentos={partida.intentos}",sesion.usuarioLog.getNombre())
     sesion.partidas.append(partida)
     sesion.usuarioLog.partidas.append(partida)
 
@@ -163,5 +163,5 @@ def cargar_pista(fila, columna, posicion_tesoro,sesion:Sesion):
     else:
      resultado = "Estás lejos del tesoro"
 
-    l.registrarlog(f"Resultado de la pista | {resultado}", sesion.usuarioLog.getNombre())
+    l.registrarLogin(f"Resultado de la pista | {resultado}", sesion.usuarioLog.getNombre())
     return resultado

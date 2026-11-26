@@ -1,3 +1,4 @@
+from estadisticas import estadisticas_sesion
 from helpers.sesion import Sesion
 from models import Usuario
 from logis import Logis as l
@@ -83,8 +84,7 @@ def menu_juego_admin():
 
         elif opt == "2":
             l.registrarLogin("Consultar estadisticas", sesion.usuarioLog.getNombre())
-            #estadisticas_sesion()
-            pass
+            estadisticas_sesion(sesion)
 
         elif opt == "3":
             l.registrarLogin("Consultar historial", sesion.usuarioLog.getNombre())

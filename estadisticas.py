@@ -1,5 +1,5 @@
 
-def estadisticas(sesion):
+def estadisticas_sesion(sesion):
     print("-----Estadisticas-----")
 
 
