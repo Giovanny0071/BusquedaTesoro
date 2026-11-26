@@ -1,36 +1,42 @@
+import sys
+from estadisticas import estadisticas_sesion
 from helpers.sesion import Sesion
-from models import Usuario
-from Logis import Logis as l
+from historial import historial_partidas
+from partida import nueva_partida
+from usuario import cargar_usuario
 sesion = Sesion()
-
+from logis import registro as l
 def menu():
 
    while True:
     print("Bienvenido a la busqueda del tesoro")
     print("1 - Iniciar sesion")
     print("2 - Salir")
-    opt = int(input("Selecciona una opcion: "))
 
-    if opt == 1:
+    try:
+        opt = int(input("Selecciona una opcion: "))
 
-       #cargar_usuario()
+        if opt == 1:
 
-       if sesion.usuarioLog is not None:
+           sesion.usuarioLog = cargar_usuario()
 
-           l.registrarLogin("Inicio de sesion",sesion.usuarioLog)
-           if sesion.usuarioLog.getRol() == "Usuario":
-               menu_juego_usuario()
-           else:
-               menu_juego_admin()
+           if sesion.usuarioLog is not None:
+               l.registrarLogin("Inicio de sesion",sesion.usuarioLog.getNombre())
+               if sesion.usuarioLog.getRol() == "Usuario":
+                   menu_juego_usuario()
+               else:
+                   menu_juego_admin()
 
-    elif opt == 2:
-        l.registrarLogin("Cierre del programa")
-        print("----FIN DEL PROGRAMA----")
-        #log
-        break
-    else:
-        print("Opcion invalida")
-        #log
+        elif opt == 2:
+            l.registrarLogin("Cierre del programa","ANONIMO")
+            print("----FIN DEL PROGRAMA----")
+            sys.exit()
+        else:
+            print("Opcion invalida")
+    except Exception as e:
+        print("Opcion no valida")
+        continue
+
 
 
 def menu_juego_usuario():
@@ -43,19 +49,19 @@ def menu_juego_usuario():
             opt = input("Selecciona una opcion: ")
 
             if opt == "1":
-                #nueva_partida()
-                l.registrarLogin("Partida Nueva", sesion.usuarioLog)
+                nueva_partida(sesion)
+                l.registrarLogin("Partida Nueva",sesion.usuarioLog.getNombre() )
                 pass
 
             elif opt == "2":
-                l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
+                l.registrarLogin("Cerrar sesion",sesion.usuarioLog.getNombre())
                 sesion.usuarioLog = None
                 return
 
             elif opt == "3":
-                l.registrarLogin("Fin del programa", sesion.usuarioLog)
+                l.registrarLogin("Fin del programa",sesion.usuarioLog.getNombre())
                 print("----FIN DEL PROGRAMA----")
-                break
+                sys.exit()
             else:
                 print("Opcion invalida")
         except Exception as e:
@@ -76,29 +82,27 @@ def menu_juego_admin():
         opt = input("Selecciona una opcion: ")
 
         if opt == "1":
-            l.registrarLogin("Partida Nueva", sesion.usuarioLog)
-            #nueva_partida()
+            l.registrarLogin("Partida Nueva", sesion.usuarioLog.getNombre())
+            nueva_partida(sesion)
             pass
 
         elif opt == "2":
-            l.registrarLogin("Consultar estadisticas", sesion.usuarioLog)
-            #estadisticas_sesion()
-            pass
+            l.registrarLogin("Consultar estadisticas", sesion.usuarioLog.getNombre())
+            estadisticas_sesion(sesion)
 
         elif opt == "3":
-            l.registrarLogin("Consultar historial", sesion.usuarioLog)
-            #historial_partidas()
-            pass
+            l.registrarLogin("Consultar historial", sesion.usuarioLog.getNombre())
+            historial_partidas(sesion)
 
         elif opt == "4":
-            l.registrarLogin("Cerrar sesion", sesion.usuarioLog)
+            l.registrarLogin("Cerrar sesion", sesion.usuarioLog.getNombre())
             sesion.usuarioLog = None
             return
 
         elif opt == "5":
-            l.registrarLogin("Salir del programa", sesion.usuarioLog)
+            l.registrarLogin("Salir del programa", sesion.usuarioLog.getNombre())
             print("----FIN DEL PROGRAMA----")
-            break
+            sys.exit()
 
         else:
             print("Opcion invalida")

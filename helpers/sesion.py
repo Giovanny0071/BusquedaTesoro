@@ -1,5 +1,7 @@
+import matplotlib.pyplot as plt
+from models import Usuario, Partida
 
-from models import Usuario
+
 class Sesion:
     def __init__(self):
         self.usuarioLog = Usuario | None
@@ -10,6 +12,8 @@ class Sesion:
         return self.usuarioLog
 
 
+
+
     def setUsuarioLog(self,usuarioLog):
         self.usuarioLog = usuarioLog
 
@@ -18,14 +22,18 @@ class Sesion:
         return self.partidas
 
 
-    def setPartidas(self,partidas):
-        self.partidas = partidas
+    def setPartida(self,partida):
+        self.partidas.append(partida)
 
+
+
+    def getPartidasIniciadas(self):
+        return len(self.getPartidas())
 
     def getPartidasFinalizadas(self):
         cont = 0
         for partida in self.partidas:
-            if partida.estado == "Ganada" or partida.estado == "Perdida":
+            if partida.getfinalizada() == True:
                 cont += 1
 
         if cont == 0:
@@ -47,7 +55,7 @@ class Sesion:
     def getPartidasGanadas(self):
         ganadas = 0
         for partida in self.partidas:
-            if partida.estado == "Ganadas":
+            if partida.estado == "Ganada":
                 ganadas += 1
 
         if ganadas == 0:
@@ -63,7 +71,16 @@ class Sesion:
         return self.getPartidasGanadas() / self.getPartidasFinalizadas() * 100
 
 
+    def getPerdidas(self):
+        perdidas = 0
+        for partida in self.partidas:
+            if partida.estado == "Perdida":
+                perdidas += 1
 
+        if perdidas == 0:
+            print("No hay Partidas perdidas")
+
+        return perdidas
 
     def getMediaIntentos(self):
         intentos = 0
@@ -75,25 +92,71 @@ class Sesion:
 
         return intentos / self.getPartidasGanadas()
 
-
-
     def getGanadasDificultad(self):
-        facil = 0
-        Normal = 0
-        Dificil = 0
-        GanadasDificultad = []
-        for partida in self.partidas:
+        ganadas_difi = [0, 0, 0]
+
+        for partida in self.getPartidas():
             if partida.estado == "Ganada":
+                if partida.dificultad == "1":
+                    ganadas_difi[0] += 1
+                elif partida.dificultad == "2":
+                    ganadas_difi[1] += 1
+                elif partida.dificultad == "3":
+                    ganadas_difi[2] += 1
 
-                if partida.dificultad == "Facil":
-                    facil += 1
-                elif partida.dificultad == "Normal":
-                    Normal += 1
-                elif  partida.dificultad == "Dificil":
-                    Dificil += 1
+        return ganadas_difi
 
-                GanadasDificultad[0] = facil
-                GanadasDificultad[1] = Normal
-                GanadasDificultad[2] = Dificil
 
-        return GanadasDificultad
+    def getTodosIntentos(self):
+        intentos = 0
+        for partida in self.getPartidas():
+            intentos += partida.intentos
+
+        return intentos
+
+
+    def partidas_por_usuario(self):
+        recuento = {}
+
+        for partida in self.partidas:
+            nombre = partida.getNombre()  # Atributo donde guardas el nombre del jugador
+
+            if nombre in recuento:
+                recuento[nombre] += 1
+            else:
+                recuento[nombre] = 1
+
+        return recuento
+
+    def getPartidasPorDificultad(self):
+        totales = [0, 0, 0]
+
+        for partida in self.getPartidas():
+            if partida.dificultad == "1":
+                totales[0] += 1
+            elif partida.dificultad == "2":
+                totales[1] += 1
+            elif partida.dificultad == "3":
+                totales[2] += 1
+
+        return totales
+
+
+    def grafico_ganadas_perdidas(self):
+        ganadas = self.getPartidasGanadas()
+        perdidas = self.getPerdidas()
+
+        plt.figure()
+        plt.bar(["Ganadas", "Perdidas"], [ganadas, perdidas])
+        plt.title("Partidas ganadas y perdidas")
+        plt.ylabel("Número de partidas")
+        plt.show()
+
+    def grafico_dificultad(self):
+        partidas_difi = self.getPartidasPorDificultad()
+
+        plt.figure()
+        plt.bar(["Fácil", "Normal", "Difícil"], partidas_difi)
+        plt.title("Partidas por dificultad")
+        plt.ylabel("Número de partidas")
+        plt.show()

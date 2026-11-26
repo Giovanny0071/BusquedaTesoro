@@ -2,11 +2,11 @@ class Usuario:
 
 
 
-    def __init__(self, nombre, contrasena, rol,partidas):
+    def __init__(self, nombre, contrasena, rol):
         self.nombre = nombre
         self.contrasena = contrasena
         self.rol = rol
-        self.partidas = partidas
+        self.partidas = []
 
 
 
@@ -22,15 +22,19 @@ class Usuario:
     def getPartidas(self):
         return self.partidas
 
+    def setPartida(self,partida):
+        self.partidas = self.partidas.append(self,partida)
+
 
 class Partida:
-    def __init__(self, nombre, estado,dificultad,tamano,intentos,tablero):
+    def __init__(self, nombre,dificultad,tablero,intentosMax):
         self.nombre = nombre
-        self.estado = estado
+        self.estado = "Abandonada"
+        self.finalizada = False
         self.dificultad = dificultad
-        self.tamano = tamano
-        self.intentos = intentos
+        self.intentos = 0
         self.tablero = tablero
+        self.intentosMax = intentosMax
 
 
     def getNombre(self):
@@ -50,4 +54,14 @@ class Partida:
 
     def getTablero(self):
         return self.tablero
+
+    def getfinalizada(self):
+        return self.finalizada
+
+
+    def setEstado(self, estado):
+        self.estado = estado
+
+    def setIntentos(self, intentos):
+        self.intentos = intentos
 
