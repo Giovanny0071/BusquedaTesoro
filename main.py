@@ -1,5 +1,5 @@
 from menu import menu
-from logis import Logis as l
+from logis import registro as l
 
 
 

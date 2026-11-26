@@ -1,6 +1,6 @@
-from helpers.sesion import Sesion
+
 from models import Usuario
-from logis import Logis as l
+from logis import registro as l
 
 def cargar_usuario():
     while True:

@@ -1,14 +1,11 @@
 import sys
-
 from estadisticas import estadisticas_sesion
 from helpers.sesion import Sesion
 from historial import historial_partidas
-from models import Usuario
-from logis import Logis as l
 from partida import nueva_partida
 from usuario import cargar_usuario
 sesion = Sesion()
-
+from logis import registro as l
 def menu():
 
    while True:
@@ -48,16 +45,16 @@ def menu_juego_usuario():
 
             if opt == "1":
                 nueva_partida(sesion)
-                l.registrarLogin(sesion.usuarioLog,"Partida Nueva",sesion.usuarioLog.getNombre() )
+                l.registrarLogin("Partida Nueva",sesion.usuarioLog.getNombre() )
                 pass
 
             elif opt == "2":
-                l.registrarLogin(sesion.usuarioLog,"Cerrar sesion",sesion.usuarioLog.getNombre())
+                l.registrarLogin("Cerrar sesion",sesion.usuarioLog.getNombre())
                 sesion.usuarioLog = None
                 return
 
             elif opt == "3":
-                l.registrarLogin(sesion.usuarioLog,"Fin del programa",sesion.usuarioLog.getNombre())
+                l.registrarLogin("Fin del programa",sesion.usuarioLog.getNombre())
                 print("----FIN DEL PROGRAMA----")
                 sys.exit()
             else:

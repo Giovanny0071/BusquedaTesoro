@@ -1,5 +1,5 @@
 import logging
-from models import Usuario as u
+
 class Logis:
     def __init__(self, fichero="registro.log"):
         logging.basicConfig(
@@ -13,3 +13,6 @@ class Logis:
 
     def registrarLogin(self, mensaje, usuario="-", nivel=logging.INFO):
         logging.log(nivel, "usuario=%s | %s", usuario, mensaje)
+
+
+registro = Logis()
