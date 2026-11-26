@@ -12,25 +12,30 @@ def menu():
     print("Bienvenido a la busqueda del tesoro")
     print("1 - Iniciar sesion")
     print("2 - Salir")
-    opt = int(input("Selecciona una opcion: "))
 
-    if opt == 1:
+    try:
+        opt = int(input("Selecciona una opcion: "))
 
-       sesion.usuarioLog = cargar_usuario()
+        if opt == 1:
 
-       if sesion.usuarioLog is not None:
-           l.registrarLogin("Inicio de sesion",sesion.usuarioLog.getNombre())
-           if sesion.usuarioLog.getRol() == "Usuario":
-               menu_juego_usuario()
-           else:
-               menu_juego_admin()
+           sesion.usuarioLog = cargar_usuario()
 
-    elif opt == 2:
-        l.registrarLogin("Cierre del programa","ANONIMO")
-        print("----FIN DEL PROGRAMA----")
-        sys.exit()
-    else:
-        print("Opcion invalida")
+           if sesion.usuarioLog is not None:
+               l.registrarLogin("Inicio de sesion",sesion.usuarioLog.getNombre())
+               if sesion.usuarioLog.getRol() == "Usuario":
+                   menu_juego_usuario()
+               else:
+                   menu_juego_admin()
+
+        elif opt == 2:
+            l.registrarLogin("Cierre del programa","ANONIMO")
+            print("----FIN DEL PROGRAMA----")
+            sys.exit()
+        else:
+            print("Opcion invalida")
+    except Exception as e:
+        print("Opcion no valida")
+        continue
 
 
 
