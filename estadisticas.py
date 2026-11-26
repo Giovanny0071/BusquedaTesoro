@@ -20,7 +20,7 @@ def estadisticas_sesion(sesion):
     print(sesion.getPorcentajeGanadasFInalizadas())
 
     print("---Numero total de intentos realizados---")
-    print(sesion.get)
+    print(sesion.getTodosIntentos())
 
     print("---Media de intentos necesarios para encontrar el tesoro en partidias ganadas---")
     print(sesion.getMediaIntentos())

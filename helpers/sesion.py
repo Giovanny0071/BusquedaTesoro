@@ -107,6 +107,14 @@ class Sesion:
         return ganadas_difi
 
 
+    def getTodosIntentos(self):
+        intentos = 0
+        for partida in self.getPartidas():
+            intentos += partida.intentos
+
+        return intentos
+
+
     def partidas_por_usuario(sesion):
         recuento = {}
 
