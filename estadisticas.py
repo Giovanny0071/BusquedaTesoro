@@ -8,22 +8,22 @@ def estadisticas_sesion(sesion):
     print(sesion.getPartidasIniciadas())
 
     print("---Total partidas finalizadas---")
-    print(sesion.getFinalizada())
+    print(sesion.getTotalPartidasFinalizadas())
 
     print("---Total de partidas ganadas--")
-    print(sesion.getganancias())
+    print(sesion.getPartidasGanadas())
 
     print("---Total de partidas abandonadas---")
-    print(sesion.getabandonadas())
+    print(sesion.getPartidasAbandonadas())
 
     print("---Porcentaje de ganadas respecto a finalizadas---")
     print(sesion.getPorcentajeGanadasFInalizadas())
 
     print("---Numero total de intentos realizados---")
-    print(sesion.getNumintentos())
+    print(sesion.get)
 
     print("---Media de intentos necesarios para encontrar el tesoro en partidias ganadas---")
-    print(sesion.getMediaIntentosNecesariosGanadas())
+    print(sesion.getMediaIntentos())
 
     print("---Ganadas segun dificultad---")
     ganadas_difi = sesion.getGanadasDificultad()

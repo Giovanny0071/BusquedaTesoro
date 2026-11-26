@@ -1,3 +1,5 @@
+import sys
+
 from estadisticas import estadisticas_sesion
 from helpers.sesion import Sesion
 from models import Usuario
@@ -28,8 +30,7 @@ def menu():
     elif opt == 2:
         l.registrarLogin("Cierre del programa","ANONIMO")
         print("----FIN DEL PROGRAMA----")
-
-        break
+        sys.exit()
     else:
         print("Opcion invalida")
 
@@ -57,7 +58,7 @@ def menu_juego_usuario():
             elif opt == "3":
                 l.registrarLogin(sesion.usuarioLog,"Fin del programa",sesion.usuarioLog.getNombre())
                 print("----FIN DEL PROGRAMA----")
-                break
+                sys.exit()
             else:
                 print("Opcion invalida")
         except Exception as e:
@@ -99,7 +100,7 @@ def menu_juego_admin():
         elif opt == "5":
             l.registrarLogin("Salir del programa", sesion.usuarioLog.getNombre())
             print("----FIN DEL PROGRAMA----")
-            break
+            sys.exit()
 
         else:
             print("Opcion invalida")
