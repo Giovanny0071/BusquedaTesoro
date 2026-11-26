@@ -47,7 +47,7 @@ def nueva_partida(sesion:Sesion):
             print("Dificultad invalida")
             continue
         try:
-             intentosMax = int(input("Cuantos intentos maximos quieres?"))
+             intentosMax = int(input("Cuantos intentos maximos quieres? : "))
 
              if(intentosMax <= 0):
                  raise ValueError
